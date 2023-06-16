@@ -1,5 +1,5 @@
 {
-  "name": "reactmdeditor",
+  "name": "ireh-md-editor",
   "description": "react markdown editor base on react-markdown library",
   "private": false,
   "license": "MIT",
@@ -10,7 +10,7 @@
     "lib/"
   ],
   "exports": {
-    "." : {
+    ".": {
       "import": "./esm/index.js",
       "require": "./cjs/index.js"
     }
@@ -18,14 +18,19 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "tsc-build": "tsc --p tsconfig-esm.json && tsc --p tsconfig-cjs.json",
+    "clean": "rimraf lib",
+    "copy-files": "copyfiles README.md lib",
+    "tsc-build": "npm run clean && tsc --p tsconfig-esm.json && tsc --p tsconfig-cjs.json && npm run copy-files",
+    "publish:npm": "npm run tsc-build && npm publish",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
   "dependencies": {
+    "copyfiles": "^2.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-markdown": "^8.0.7"
+    "react-markdown": "^8.0.7",
+    "rimraf": "^5.0.1"
   },
   "devDependencies": {
     "@types/react": "^18.0.37",
